@@ -27,8 +27,8 @@ class PostsController < ApplicationController
   end
 
   def update
-   if current_user.vip? || current_user.admin?
-     @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
+     return head(:forbidden) unless current_user == @post.user || current_user.vip? || current_user.admin?
      @post.update(posts_params)
    end
  end
