@@ -13,11 +13,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
-    else
+      unless current_user.admin? 
+        unless @user == current_user
+          redirect_to users_path
       flash[:error] = "Access denied."
-      redirect_to users_path
+      end
     end
   end
 
