@@ -32,7 +32,7 @@ class PostsController < ApplicationController
       redirect_to :back, :alert => "Access denied."
     else
       @post = Post.find_by(params[:id])
-      @post.update(post_params)
+      @post.update!(content: params[:post][:content])
       redirect_to post_path
     end
   end
