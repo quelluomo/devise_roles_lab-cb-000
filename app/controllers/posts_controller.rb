@@ -26,6 +26,13 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def update
+   if current_user.vip? || current_user.admin?
+     @post = Post.find(params[:id])
+     @post.update(posts_params)
+   end
+ end
+
   #def update
   #    if !current_user.admin? && !current_user.vip?
   #    redirect_to :back, :alert => "Access denied."
