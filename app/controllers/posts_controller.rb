@@ -30,6 +30,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
      return head(:forbidden) unless current_user == @post.user || current_user.vip? || current_user.admin?
      @post.update(posts_params)
+     redirect_to post_path(id: @post.id)
    end
  end
 
