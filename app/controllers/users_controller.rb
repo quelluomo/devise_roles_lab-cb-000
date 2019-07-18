@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
       @user = User.find(params[:id])
-      unless current_user.admin? 
+      unless current_user.admin?
         unless @user == current_user
           redirect_to users_path
       flash[:error] = "Access denied."
